@@ -145,9 +145,19 @@ namespace Sass {
   Context::~Context()
   {
     // resources were allocated by malloc
+    std::cerr << "resources.size() = " << resources.size() << "\n";
+    for (size_t a = 0; a < resources.size(); ++a) {
+      std::cerr << "resources[" << a << "].contents = " << static_cast<void*>(resources[a].contents) << std::endl;
+      std::cerr << "resources[" << a << "].srcmap = " << static_cast<void*>(resources[a].srcmap) << std::endl;
+    }
+    // resources were allocated by malloc
     for (size_t i = 0; i < resources.size(); ++i) {
       free(resources[i].contents);
       free(resources[i].srcmap);
+    }
+    std::cerr << "strings.size() = " << strings.size() << "\n";
+    for (size_t b = 0; b < strings.size(); ++b) {
+      std::cerr << "strings[" << b << "] = " << static_cast<void*>(strings[b]) << std::endl;
     }
     // free all strings we kept alive during compiler execution
     for (size_t n = 0; n < strings.size(); ++n) free(strings[n]);

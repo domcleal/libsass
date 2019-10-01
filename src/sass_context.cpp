@@ -377,7 +377,7 @@ extern "C" {
     // pass errors to generic error handler
     catch (...) { handle_errors(c_ctx); }
 
-    sass_delete_compiler(compiler);
+    if (compiler) sass_delete_compiler(compiler);
 
     return c_ctx->error_status;
   }

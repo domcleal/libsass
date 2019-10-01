@@ -5,6 +5,7 @@
 #include <cstring>
 #include <stdexcept>
 #include <sstream>
+#include <stdio>
 #include <string>
 #include <vector>
 
@@ -368,6 +369,7 @@ extern "C" {
 
     // prepare sass compiler with context and options
     Sass_Compiler* compiler = sass_prepare_context(c_ctx, cpp_ctx);
+    fprintf(STDERR, "sass_prepare_compiler => %p\n", compiler);
 
     try {
       // call each compiler step
@@ -377,7 +379,8 @@ extern "C" {
     // pass errors to generic error handler
     catch (...) { handle_errors(c_ctx); }
 
-    if (compiler) sass_delete_compiler(compiler);
+    fprintf(STDERR, "sass_delete_compiler(%p)\n", compiler);
+    sass_delete_compiler(compiler);
 
     return c_ctx->error_status;
   }

@@ -5,7 +5,7 @@
 #include <cstring>
 #include <stdexcept>
 #include <sstream>
-#include <stdio>
+#include <stdio.h>
 #include <string>
 #include <vector>
 
